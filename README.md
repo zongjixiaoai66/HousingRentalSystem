@@ -1,5 +1,6 @@
 # 启动教程
 
+- 项目录屏：https://www.bilibili.com/video/BV1694y1w7Ku
 - 启动教程：https://www.bilibili.com/video/BV1pW4y1P7GR
 - 安装包在视频详情中已提供。
 
