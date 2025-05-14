@@ -378,7 +378,7 @@ export default {
 .editor{
   height: 500px;
   
-  & /deep/ .ql-container {
+  & ::v-deep .ql-container {
 	  height: 310px;
   }
 }

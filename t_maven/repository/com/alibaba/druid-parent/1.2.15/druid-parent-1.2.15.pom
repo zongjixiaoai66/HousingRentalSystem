@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.alibaba</groupId>
+	<artifactId>druid-parent</artifactId>
+	<version>1.2.15</version>
+	<name>${project.artifactId}</name>
+	<description>A JDBC datasource implementation.</description>
+	<packaging>pom</packaging>
+	<url>https://github.com/alibaba/druid</url>
+	<inceptionYear>2022</inceptionYear>
+
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/alibaba/druid</url>
+		<connection>scm:git:https://git@github.com/alibaba/druid.git</connection>
+	</scm>
+
+	<properties>
+		<maven.compiler.source>8</maven.compiler.source>
+		<maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<spring.version>4.3.20.RELEASE</spring.version>
+		<junit.version>4.13.1</junit.version>
+		<jmh.version>1.19</jmh.version>
+
+		<gpg.skip>false</gpg.skip>
+		<javadoc.skip>false</javadoc.skip>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>1.8</jdk.version>
+
+		<maven.deploy.skip>false</maven.deploy.skip>
+	</properties>
+
+	<modules>
+		<module>core</module>
+		<module>druid-spring-boot-starter</module>
+		<module>druid-wrapper</module>
+		<module>druid-demo-petclinic</module>
+	</modules>
+
+	<organization>
+		<name>Alibaba Group</name>
+		<url>https://github.com/alibaba</url>
+	</organization>
+	<developers>
+		<developer>
+			<id>wenshao</id>
+			<name>wenshao</name>
+			<email>szujobs@hotmail.com</email>
+		</developer>
+		<developer>
+			<id>kiki</id>
+			<name>kiki</name>
+			<email>little.fierydragon@gmail.com</email>
+		</developer>
+		<developer>
+			<id>yako</id>
+			<name>yako</name>
+			<email>yakolyh@gmail.com</email>
+		</developer>
+	</developers>
+
+	<distributionManagement>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- spring libs -->
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!--
+                Compiling Kotlin and Java sources - Using Maven - Kotlin Programming Language
+                https://kotlinlang.org/docs/reference/using-maven.html#compiling-kotlin-and-java-sources
+
+                Making sure that the kotlin plugin is above the maven-compiler-plugin in your pom.xml file!
+            -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<executions>
+					<!-- Replacing default-compile as it is treated specially by maven -->
+					<execution>
+						<id>default-compile</id>
+						<phase>none</phase>
+					</execution>
+					<!-- Replacing default-testCompile as it is treated specially by maven -->
+					<execution>
+						<id>default-testCompile</id>
+						<phase>none</phase>
+					</execution>
+					<execution>
+						<id>java-compile</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>java-test-compile</id>
+						<phase>test-compile</phase>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.1.2</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.puppycrawl.tools</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>9.2</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>checkstyle</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<skip>false</skip>
+							<failOnViolation>true</failOnViolation>
+							<includeTestSourceDirectory>false</includeTestSourceDirectory>
+							<configLocation>src/checkstyle/druid-checks.xml</configLocation>
+							<excludes>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.2.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.3.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.2.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>3.2.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.10.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>3.4.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>3.0.0-M7</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>3.4.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.12.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>3.0.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>3.0.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-shade-plugin</artifactId>
+					<version>3.3.0</version>
+				</plugin>
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>1.6.13</version>
+				</plugin>
+				<plugin>
+					<groupId>org.moditect</groupId>
+					<artifactId>moditect-maven-plugin</artifactId>
+					<version>1.0.0.RC2</version>
+					<executions>
+						<execution>
+							<id>add-module-infos</id>
+							<phase>package</phase>
+							<goals>
+								<goal>add-module-info</goal>
+							</goals>
+							<configuration>
+								<jvmVersion>9</jvmVersion>
+								<overwriteExistingFiles>true</overwriteExistingFiles>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>gen-src</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<attach>true</attach>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>gen-javadoc</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<properties>
+				<javadoc.default.exclude.packages>
+					*.internal:*.internal.*:*.internal.*.*:*.internal.*.*.*:*.internal.*.*.*.*
+				</javadoc.default.exclude.packages>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-javadoc</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<show>protected</show>
+							<charset>UTF-8</charset>
+							<encoding>UTF-8</encoding>
+							<docencoding>UTF-8</docencoding>
+							<!-- https://maven.apache.org/plugins/maven-javadoc-plugin/examples/exclude-package-names.html -->
+							<excludePackageNames>${javadoc.default.exclude.packages}</excludePackageNames>
+							<doclint>all,-missing</doclint>
+							<links>
+								<link>https://docs.oracle.com/javase/8/docs/api</link>
+							</links>
+							<additionalJOptions>
+								<additionalJOption>-J-Duser.language=en -J-Duser.country=US</additionalJOption>
+							</additionalJOptions>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>gen-sign</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>gen-git-properties</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<!--
+                        Maven plugin which includes build-time git repository information into an POJO / *.properties).
+                        Make your apps tell you which version exactly they were built from! Priceless in large distributed deployments.
+                            https://github.com/git-commit-id/git-commit-id-maven-plugin
+                    -->
+					<plugin>
+						<groupId>io.github.git-commit-id</groupId>
+						<artifactId>git-commit-id-maven-plugin</artifactId>
+						<!-- DO NOT upgrade to v5+, since don't support java 8 -->
+						<version>5.0.0</version>
+						<executions>
+							<execution>
+								<id>get-the-git-infos</id>
+								<goals>
+									<goal>revision</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>validate-the-git-infos</id>
+								<goals>
+									<goal>validateRevision</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<validationProperties>
+								<!-- verify that the current repository is not dirty -->
+								<validationProperty>
+									<name>validating git dirty</name>
+									<value>${git.dirty}</value>
+									<shouldMatchTo>false</shouldMatchTo>
+								</validationProperty>
+							</validationProperties>
+							<generateGitPropertiesFile>true</generateGitPropertiesFile>
+							<generateGitPropertiesFilename>
+								${project.build.outputDirectory}/META-INF/scm/${project.groupId}/${project.artifactId}/git.properties
+							</generateGitPropertiesFilename>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>gen-code-cov</id>
+			<build>
+				<plugins>
+					<plugin>
+						<!--
+                            Code Coverage
+                            config example: https://github.com/codecov/example-java
+                            plugin docs: https://eclemma.org/jacoco/trunk/doc/
+                        -->
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>0.8.8</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>report</id>
+								<phase>test</phase>
+								<goals>
+									<goal>report</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>deploy-settings</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<extensions>true</extensions>
+						<!--
+                            In multi-module builds using the deploy-at-end feature,
+                            the deployment of all components is performed in the last module based on the reactor order.
+                            If this property is set to true in the last module,
+                            all staging deployment for all modules will be skipped.
+                            so, we'll config nexus deploy after deploy phase of every module
+                            see: https://github.com/sonatype/nexus-maven-plugins/tree/master/staging/maven-plugin#configuring-the-plugin
+                        -->
+						<executions>
+							<execution>
+								<id>default-deploy</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<serverId>ossrh</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+							<!--
+                            If you are deploying to Maven Central,
+                            it is the Nexus Staging Plugin that is doing the deployment instead of the `deploy` plugin,
+                            so the configuration of the `deploy` plugin has no effect.
+                            To make the Nexus deploy plugin skip,
+                            set skipNexusStagingDeployMojo in its configuration to true.
+                            see: https://stackoverflow.com/questions/59552549/preventing-maven-modules-from-being-deployed
+                        -->
+							<skipNexusStagingDeployMojo>${maven.deploy.skip}</skipNexusStagingDeployMojo>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<packaging>jar</packaging>
+
+	<groupId>math.geom2d</groupId>
+	<artifactId>javaGeom</artifactId>
+	<version>0.11.1</version>
+
+	<name>JavaGeom</name>
+	<url>http://geom-java.sourceforge.net/index.html</url>
+	<description>
+		JavaGeom - The aim of JavaGeom is to provide methods to easily perform geometric computations, such as intersections of lines, clipping of polygons, transformation shapes, perimeter and area computations...
+
+		This is a binary &amp; source redistribution of the original, unmodified JavaGeom library originating from:
+		"http://sourceforge.net/projects/geom-java/files/javaGeom/javaGeom%200.11.1/".
+
+		The purpose of this redistribution is to make the library available to other Maven projects.
+	</description>
+
+	<issueManagement>
+		<system>osqa</system>
+		<url>http://sourceforge.net/p/geom-java/discussion/</url>
+	</issueManagement>
+
+	<developers>
+		<developer>
+			<id>dlegland</id>
+			<name>David</name>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>svn://svn.code.sf.net/p/geom-java/code</connection>
+		<url>http://svn.code.sf.net/p/geom-java/code</url>
+	</scm>
+
+	<licenses>
+		<license>
+			<name>GNU Library or Lesser General Public License version 2.0 (LGPLv2)</name>
+			<url>http://www.gnu.org/licenses/lgpl-2.0.html</url>
+		</license>
+	</licenses>
+</project>
